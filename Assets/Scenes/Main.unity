@@ -3854,6 +3854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a6d67fdcf33be34080d30a75ed23e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 1767932041}
   currentActiveState: 
   previousActiveState: 
 --- !u!4 &1443496002
@@ -4503,6 +4504,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d206b20a4cccf40a4271f933856da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuUI: {fileID: 675014251}
+  gamePlayUI: {fileID: 896185439}
+  pausedUI: {fileID: 21702495}
 --- !u!1 &1798597766
 GameObject:
   m_ObjectHideFlags: 0

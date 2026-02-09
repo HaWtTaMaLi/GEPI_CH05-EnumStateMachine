@@ -18,7 +18,6 @@ public class ServiceHub : MonoBehaviour
     [SerializeField] public GameStateManager gameStateManager;
     [SerializeField] public UIManager uiManager;
 
-
     private void Awake()
     {
         #region Singleton Pattern

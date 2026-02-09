@@ -11,6 +11,7 @@ public enum GameState
 
 public class GameStateManager : MonoBehaviour
 {
+    public UIManager uiManager;
     public GameState currentState { get; private set; }
 
     public GameState previouseState { get; private set; }
@@ -23,6 +24,8 @@ public class GameStateManager : MonoBehaviour
     {
         //set initial state
         SetState(GameState.Init);
+
+        uiManager = ServiceHub.Instance.uiManager;
     }
 
     public void SetState(GameState newState)
@@ -61,20 +64,23 @@ public class GameStateManager : MonoBehaviour
 
             case GameState.MainMenu:
                 Debug.Log("Game State Changed to Main Menu");
-                
+
                 //do main menu stuff
+                uiManager.ShowMainMenuUI();
                 return;
 
             case GameState.GamePlay:
                 Debug.Log("Game State Changed to Game Play");
-                
+
                 //do game play stuff
+                uiManager.ShowGamePlayUI();
                 return;
 
             case GameState.Paused:
                 Debug.Log("Game State Changed to Paused");
-                
+
                 //do paused stuff
+                uiManager.ShowPausedUI();
                 return;
         }
     }
