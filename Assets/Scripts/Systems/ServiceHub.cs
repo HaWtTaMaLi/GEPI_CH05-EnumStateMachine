@@ -15,10 +15,8 @@ public class ServiceHub : MonoBehaviour
     public static ServiceHub Instance { get; private set; }
 
     [Header("System References")]
-
-    [SerializeField] public GameStateManager gameStateManager { get; private set; }
-
-    [SerializeField] public UIManager uiManager { get; private set; }
+    [SerializeField] public GameStateManager gameStateManager;
+    [SerializeField] public UIManager uiManager;
 
 
     private void Awake()
@@ -37,7 +35,4 @@ public class ServiceHub : MonoBehaviour
 
         #endregion
     }
-
-
-
 }
