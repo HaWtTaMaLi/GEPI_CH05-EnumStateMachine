@@ -9,7 +9,8 @@ public enum GameState
     GamePlay,
     Paused,
     Options,
-    GameOver
+    GameOver,
+    AreYouSure
 }
 
 public class GameStateManager : MonoBehaviour
@@ -100,6 +101,12 @@ public class GameStateManager : MonoBehaviour
                 //do game over stuff
                 uiManager.ShowGameOverUI();
                 return;
+            case GameState.AreYouSure:
+                Debug.Log("Game State Changed to Are You Sure");
+
+                //do are you sure stuff
+                uiManager.ShowAreYouSureUI();
+                return;
         }
     }
 
@@ -147,6 +154,24 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public void OnExitGame()
+    {
+        SetState(GameState.AreYouSure);
+    }
+
+    public void OnQuit()
+    {
+        Debug.Log("Quitting Game...");
+
+#if UNITY_EDITOR
+        // Stops play mode in the Editor
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // Quits the built application
+        Application.Quit();
+#endif
+    }
+    
     public void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -156,9 +181,18 @@ public class GameStateManager : MonoBehaviour
                 Debug.Log("Toggling Pause");
                 TogglePause();
             }
+            else if (currentState == GameState.Paused)
+            {
+                TogglePause();
+            }
+            else if (currentState == GameState.MainMenu || currentState == GameState.Paused)
+            {
+                //pop up quit confirmation
+                OnExitGame();
+            }
             else
             {
-                Debug.Log("Returning to previous state from options");
+                Debug.Log("Returning to previous state");
                 SetState(previouseState);
             }
         }

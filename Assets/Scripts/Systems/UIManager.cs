@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pausedUI;
     [SerializeField] private GameObject optionsUI;
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject areYouSureUI;
 
     public void ShowMainMenuUI()
     {
@@ -41,6 +42,11 @@ public class UIManager : MonoBehaviour
         gameOverUI.SetActive(true);
     }
 
+    public void ShowAreYouSureUI()
+    {
+        areYouSureUI.SetActive(true);
+    }
+
     public void HideAllUI()
     {
         mainMenuUI.SetActive(false);
@@ -48,5 +54,6 @@ public class UIManager : MonoBehaviour
         pausedUI.SetActive(false);
         optionsUI.SetActive(false);
         gameOverUI.SetActive(false);
+        areYouSureUI.SetActive(false);
     }
 }
