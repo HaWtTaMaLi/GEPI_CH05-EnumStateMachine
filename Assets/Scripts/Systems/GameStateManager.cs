@@ -77,7 +77,6 @@ public class GameStateManager : MonoBehaviour
                 Debug.Log("Game State Changed to Game Play");
 
                 //do game play stuff
-                SetState(GameState.GamePlay);
                 uiManager.ShowGamePlayUI();
                 return;
 
@@ -101,6 +100,7 @@ public class GameStateManager : MonoBehaviour
                 //do game over stuff
                 uiManager.ShowGameOverUI();
                 return;
+
             case GameState.AreYouSure:
                 Debug.Log("Game State Changed to Are You Sure");
 
@@ -172,6 +172,11 @@ public class GameStateManager : MonoBehaviour
 #endif
     }
     
+    public void OnNoExit()
+    {
+        SetState(previouseState);
+    }
+
     public void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
