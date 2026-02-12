@@ -111,6 +111,8 @@ public class GameStateManager : MonoBehaviour
 
     public void TogglePause()
     {
+        Debug.Log("Toggling Pause");
+
         if (currentState == GameState.Paused)
         {
             //ignore if in game play
@@ -126,4 +128,25 @@ public class GameStateManager : MonoBehaviour
             SetState(GameState.Paused);
         }
     }
+
+    public void ToggleGameOver()
+    {
+        if (currentState == GameState.GamePlay)
+            SetState(GameState.GameOver);
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+            uiManager.ShowPausedUI();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ToggleGameOver();
+        }
+    }
+
 }
