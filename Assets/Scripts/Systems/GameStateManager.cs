@@ -27,7 +27,6 @@ public class GameStateManager : MonoBehaviour
     {
         //set initial state
         SetState(GameState.Init);
-
         uiManager = ServiceHub.Instance.uiManager;
     }
 
@@ -77,6 +76,7 @@ public class GameStateManager : MonoBehaviour
                 Debug.Log("Game State Changed to Game Play");
 
                 //do game play stuff
+                SetState(GameState.GamePlay);
                 uiManager.ShowGamePlayUI();
                 return;
 
@@ -109,38 +109,58 @@ public class GameStateManager : MonoBehaviour
         SetState(GameState.GamePlay);
     }
 
+    public void OpenOptions()
+    {
+        SetState(GameState.Options);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SetState(GameState.MainMenu);
+    }
+
     public void TogglePause()
     {
-        Debug.Log("Toggling Pause");
-
-        if (currentState == GameState.Paused)
+        if (currentState == GameState.GamePlay)
         {
             //ignore if in game play
             if (currentState == GameState.Paused) return;
-                //resume
-                SetState(GameState.GamePlay);
+            //resume
+            SetState(GameState.Paused);
         }
-        else if (currentState == GameState.GamePlay)
+        else if (currentState == GameState.Paused)
         {
             //ignore if paused
             if (currentState == GameState.GamePlay) return;
             //pause
-            SetState(GameState.Paused);
+            SetState(GameState.GamePlay);
         }
     }
 
     public void ToggleGameOver()
     {
+        Debug.Log("Toggling Game Over");
+        
         if (currentState == GameState.GamePlay)
+        {
             SetState(GameState.GameOver);
+        }
     }
 
     public void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePause();
-            uiManager.ShowPausedUI();
+            if(currentState == GameState.GamePlay)
+            {
+                Debug.Log("Toggling Pause");
+                TogglePause();
+            }
+            else
+            {
+                Debug.Log("Returning to previous state from options");
+                SetState(previouseState);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -148,5 +168,4 @@ public class GameStateManager : MonoBehaviour
             ToggleGameOver();
         }
     }
-
 }

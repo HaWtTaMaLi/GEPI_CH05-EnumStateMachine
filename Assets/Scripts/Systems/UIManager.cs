@@ -25,7 +25,8 @@ public class UIManager : MonoBehaviour
     public void ShowPausedUI()
     {
         HideAllUI();
-        pausedUI.SetActive(true);
+        gamePlayUI.SetActive(true); //keep the game play UI active in the background
+        pausedUI.SetActive(true); 
     }
 
     public void ShowOptionsUI()
@@ -48,5 +49,4 @@ public class UIManager : MonoBehaviour
         optionsUI.SetActive(false);
         gameOverUI.SetActive(false);
     }
-
 }
