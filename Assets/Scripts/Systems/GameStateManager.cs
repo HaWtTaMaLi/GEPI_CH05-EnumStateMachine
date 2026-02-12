@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -6,7 +7,9 @@ public enum GameState
     Init,
     MainMenu,
     GamePlay,
-    Paused
+    Paused,
+    Options,
+    GameOver
 }
 
 public class GameStateManager : MonoBehaviour
@@ -58,8 +61,9 @@ public class GameStateManager : MonoBehaviour
 
             case GameState.Init:
                 Debug.Log("Game State Changed to Init");
-                SetState(GameState.MainMenu);
+
                 //do Init stuff
+                SetState(GameState.MainMenu);
                 return;
 
             case GameState.MainMenu:
@@ -82,7 +86,44 @@ public class GameStateManager : MonoBehaviour
                 //do paused stuff
                 uiManager.ShowPausedUI();
                 return;
+
+            case GameState.Options:
+                Debug.Log("Game State Changed to Options");
+
+                //do options stuff
+                uiManager.ShowOptionsUI();
+                return;
+
+            case GameState.GameOver:
+                Debug.Log("Game State Changed to Game Over");
+
+                //do game over stuff
+                uiManager.ShowGameOverUI();
+                return;
         }
     }
 
+    //Button Logic
+    public void StartGame()
+    {
+        SetState(GameState.GamePlay);
+    }
+
+    public void TogglePause()
+    {
+        if (currentState == GameState.Paused)
+        {
+            //ignore if in game play
+            if (currentState == GameState.Paused) return;
+                //resume
+                SetState(GameState.GamePlay);
+        }
+        else if (currentState == GameState.GamePlay)
+        {
+            //ignore if paused
+            if (currentState == GameState.GamePlay) return;
+            //pause
+            SetState(GameState.Paused);
+        }
+    }
 }

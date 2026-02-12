@@ -7,12 +7,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuUI;
     [SerializeField] private GameObject gamePlayUI;
     [SerializeField] private GameObject pausedUI;
+    [SerializeField] private GameObject optionsUI;
+    [SerializeField] private GameObject gameOverUI;
 
     public void ShowMainMenuUI()
     {
         HideAllUI();
         mainMenuUI.SetActive(true);
     }
+
     public void ShowGamePlayUI()
     {
         HideAllUI();
@@ -25,11 +28,25 @@ public class UIManager : MonoBehaviour
         pausedUI.SetActive(true);
     }
 
+    public void ShowOptionsUI()
+    {
+        HideAllUI();
+        optionsUI.SetActive(true);
+    }
+
+    public void ShowGameOverUI()
+    {
+        HideAllUI();
+        gameOverUI.SetActive(true);
+    }
+
     public void HideAllUI()
     {
         mainMenuUI.SetActive(false);
         gamePlayUI.SetActive(false);
         pausedUI.SetActive(false);
+        optionsUI.SetActive(false);
+        gameOverUI.SetActive(false);
     }
 
 }
